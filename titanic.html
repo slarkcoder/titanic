@@ -12,27 +12,6 @@
   <body>
   <script type="text/javascript">
     d3.csv('train.csv', function(error, data) {
-      var survived = 0
-      var death = 0
-
-      for(var item in data) {
-        if(data[item]['Survived'] == 0){
-          death += 1
-        }else{
-          survived += 1
-        }
-      }
-
-      var dataSet = [
-        {
-          "name":"Survived",
-          "count":survived
-        },
-        {
-          "name":"Death",
-          "count":death
-        }
-      ]
 
       var width = 800
       var height = 600
@@ -46,10 +25,33 @@
       .style("font-size", "16px")
       .text("泰坦尼克号乘客生存和死亡情况");
 
-      var chart = new dimple.chart(svg, dataSet);
-      var x = chart.addCategoryAxis("x", "name");
-      var y = chart.addMeasureAxis("y", "count");
-      var s = chart.addSeries(null, dimple.plot.bar);
+      var nests = d3.nest()
+          .key(function(d) { return d.Survived; })
+          .rollup(function(peoples) { return peoples.length; })
+          .entries(data);
+
+      var nest_sex = d3.nest()
+          .key(function(d) { return d.Survived; })
+          .key(function(d) { return d.Sex; })
+          .entries(data);
+
+      var nest_pclass = d3.nest()
+          .key(function(d) { return d.Survived; })
+          .key(function(d) { return d.Pclass; })
+          .entries(data);
+
+      var nest_count = d3.nest()
+          .key(function(d) { return d.Survived; })
+          .key(function(d) { return d.Pclass; })
+          .rollup(function(peoples) { return peoples.length; })
+          .entries(data);
+
+      var chart = new dimple.chart(svg, nests);
+
+      var x = chart.addCategoryAxis("x", "key");
+      var y = chart.addMeasureAxis("y", "value");
+
+      var s = chart.addSeries("Pclass", dimple.plot.bar);
 
       x.title = "生存、死亡"
       y.title = "人数"

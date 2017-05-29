@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+    <title></title>
+
+    <style media="screen">
+    </style>
+  </head>
+  <body>
+  <script type="text/javascript">
+    d3.csv('train.csv', function(error, data) {
+      var survived = 0
+      var death = 0
+
+      for(var item in data) {
+        if(data[item]['Survived'] == 0){
+          death += 1
+        }else{
+          survived += 1
+        }
+      }
+
+      var dataSet = [
+        {
+          "name":"Survived",
+          "count":survived
+        },
+        {
+          "name":"Death",
+          "count":death
+        }
+      ]
+
+      var width = 800
+      var height = 600
+
+      var svg = dimple.newSvg("body", width, height);
+
+      svg.append("text")
+      .attr("x", (width/2))
+      .attr("y", 30)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .text("泰坦尼克号乘客生存和死亡情况");
+
+      var chart = new dimple.chart(svg, dataSet);
+      var x = chart.addCategoryAxis("x", "name");
+      var y = chart.addMeasureAxis("y", "count");
+      var s = chart.addSeries(null, dimple.plot.bar);
+
+      x.title = "生存、死亡"
+      y.title = "人数"
+
+      chart.draw();
+    });
+
+  </script>
+  </body>
+</html>

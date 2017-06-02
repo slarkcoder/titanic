@@ -123,6 +123,8 @@ d3.csv('train.csv', function(error, data) {
     chart_pie.setBounds(width/2 - 180, height/2 - 180, 360, 360)
     chart_pie.addMeasureAxis("p", "value");
     chart_pie.addSeries("key", dimple.plot.pie);
+    chart_pie.assignColor("死亡", "#FA9A91");
+    chart_pie.assignColor("幸存", "#9BC1DA");
     chart_pie.draw();
 
     //海难发生前乘客的座位等级数柱状图
@@ -160,6 +162,8 @@ d3.csv('train.csv', function(error, data) {
     pie_pclass_1.setBounds(25, height/2 - 75, 150, 150)
     pie_pclass_1.addMeasureAxis("p", "value");
     pie_pclass_1.addSeries("key", dimple.plot.pie);
+    pie_pclass_1.assignColor("死亡", "#FA9A91");
+    pie_pclass_1.assignColor("幸存", "#9BC1DA");
     pie_pclass_1.draw();
 
     //拥有二等座的乘客的幸存比例
@@ -179,6 +183,8 @@ d3.csv('train.csv', function(error, data) {
     pie_pclass_2.setBounds(225, height/2 - 75, 150, 150)
     pie_pclass_2.addMeasureAxis("p", "value");
     pie_pclass_2.addSeries("key", dimple.plot.pie);
+    pie_pclass_2.assignColor("死亡", "#FA9A91");
+    pie_pclass_2.assignColor("幸存", "#9BC1DA");
     pie_pclass_2.draw();
 
     //拥有三等座的乘客的幸存比例
@@ -198,6 +204,8 @@ d3.csv('train.csv', function(error, data) {
     pie_pclass_3.setBounds(425, height/2 - 75, 150, 150)
     pie_pclass_3.addMeasureAxis("p", "value");
     pie_pclass_3.addSeries("key", dimple.plot.pie);
+    pie_pclass_3.assignColor("死亡", "#FA9A91");
+    pie_pclass_3.assignColor("幸存", "#9BC1DA");
     pie_pclass_3.draw();
 
     //海难发生前乘客的男女性别数柱状图
@@ -235,6 +243,8 @@ d3.csv('train.csv', function(error, data) {
     pie_male.setBounds(0, height/2 - 150, 250, 250)
     pie_male.addMeasureAxis("p", "value");
     pie_male.addSeries("key", dimple.plot.pie);
+    pie_male.assignColor("死亡", "#FA9A91");
+    pie_male.assignColor("幸存", "#9BC1DA");
     pie_male.draw();
 
     //女性乘客的幸存比例
@@ -253,6 +263,36 @@ d3.csv('train.csv', function(error, data) {
     var pie_female = new dimple.chart(svg_pie_sex, data_female);
     pie_female.setBounds(300, height/2 - 150, 250, 250)
     pie_female.addMeasureAxis("p", "value");
-    pie_female.addSeries("key", dimple.plot.pie);
+    var pie = pie_female.addSeries("key", dimple.plot.pie);
+    pie_female.assignColor("死亡", "#FA9A91");
+    pie_female.assignColor("幸存", "#9BC1DA");
     pie_female.draw();
+    pie.afterDraw = function(shape, data){
+      	var s = d3.select(shape),
+      	rect = {
+      		x: parseFloat(s.attr("x")),
+      		y: parseFloat(s.attr("y")),
+      		width: parseFloat(s.attr("width")),
+      		height: parseFloat(s.attr("height"))
+      	};
+
+        if (rect.height >= 0) {
+          // Add a text label for the value
+          svg.append("text")
+            // Position in the centre of the shape (vertical position is
+            // manually set due to cross-browser problems with baseline)
+            .attr("x", rect.x + rect.width / 2)
+            .attr("y", rect.y + rect.height / 2 + 3.5)
+            // Centre align
+            .style("text-anchor", "middle")
+            .style("font-size", "10px")
+            .style("font-family", "sans-serif")
+            // Make it a little transparent to tone down the black
+            .style("opacity", 0.6)
+            // Prevent text cursor on hover and allow tooltips
+            .style("pointer-events", "none")
+            // Format the number
+            .text("ssssss");
+        }
+    }
   });

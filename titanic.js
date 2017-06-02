@@ -125,6 +125,7 @@ d3.csv('train.csv', function(error, data) {
     chart_pie.addSeries("key", dimple.plot.pie);
     chart_pie.assignColor("死亡", "#FA9A91");
     chart_pie.assignColor("幸存", "#9BC1DA");
+    chart_pie.addLegend(480, 100, 90, 300, "left");
     chart_pie.draw();
 
     //海难发生前乘客的座位等级数柱状图
@@ -153,7 +154,7 @@ d3.csv('train.csv', function(error, data) {
     var svg_pie_pclass = dimple.newSvg("body", width, height);
     svg_pie_pclass.append("text")
     .attr("x", 100)
-    .attr("y", height/2 - 100)
+    .attr("y", height/2 - 150)
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
     .text("一等座乘客生存和死亡比例");
@@ -164,6 +165,7 @@ d3.csv('train.csv', function(error, data) {
     pie_pclass_1.addSeries("key", dimple.plot.pie);
     pie_pclass_1.assignColor("死亡", "#FA9A91");
     pie_pclass_1.assignColor("幸存", "#9BC1DA");
+    pie_pclass_1.addLegend(150, 180, 90, 300, "left");
     pie_pclass_1.draw();
 
     //拥有二等座的乘客的幸存比例
@@ -174,7 +176,7 @@ d3.csv('train.csv', function(error, data) {
 
     svg_pie_pclass.append("text")
     .attr("x", 300)
-    .attr("y", height/2 - 100)
+    .attr("y", height/2 - 150)
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
     .text("二等座乘客生存和死亡比例");
@@ -185,6 +187,7 @@ d3.csv('train.csv', function(error, data) {
     pie_pclass_2.addSeries("key", dimple.plot.pie);
     pie_pclass_2.assignColor("死亡", "#FA9A91");
     pie_pclass_2.assignColor("幸存", "#9BC1DA");
+    pie_pclass_2.addLegend(350, 180, 90, 300, "left");
     pie_pclass_2.draw();
 
     //拥有三等座的乘客的幸存比例
@@ -195,7 +198,7 @@ d3.csv('train.csv', function(error, data) {
 
     svg_pie_pclass.append("text")
     .attr("x", 500)
-    .attr("y", height/2 - 100)
+    .attr("y", height/2 - 150)
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
     .text("三等座乘客生存和死亡比例");
@@ -206,6 +209,7 @@ d3.csv('train.csv', function(error, data) {
     pie_pclass_3.addSeries("key", dimple.plot.pie);
     pie_pclass_3.assignColor("死亡", "#FA9A91");
     pie_pclass_3.assignColor("幸存", "#9BC1DA");
+    pie_pclass_3.addLegend(550, 180, 90, 300, "left");
     pie_pclass_3.draw();
 
     //海难发生前乘客的男女性别数柱状图
@@ -245,6 +249,7 @@ d3.csv('train.csv', function(error, data) {
     pie_male.addSeries("key", dimple.plot.pie);
     pie_male.assignColor("死亡", "#FA9A91");
     pie_male.assignColor("幸存", "#9BC1DA");
+    pie_male.addLegend(220, 120, 90, 300, "left");
     pie_male.draw();
 
     //女性乘客的幸存比例
@@ -266,33 +271,6 @@ d3.csv('train.csv', function(error, data) {
     var pie = pie_female.addSeries("key", dimple.plot.pie);
     pie_female.assignColor("死亡", "#FA9A91");
     pie_female.assignColor("幸存", "#9BC1DA");
+    pie_female.addLegend(500, 120, 90, 300, "left");
     pie_female.draw();
-    pie.afterDraw = function(shape, data){
-      	var s = d3.select(shape),
-      	rect = {
-      		x: parseFloat(s.attr("x")),
-      		y: parseFloat(s.attr("y")),
-      		width: parseFloat(s.attr("width")),
-      		height: parseFloat(s.attr("height"))
-      	};
-
-        if (rect.height >= 0) {
-          // Add a text label for the value
-          svg.append("text")
-            // Position in the centre of the shape (vertical position is
-            // manually set due to cross-browser problems with baseline)
-            .attr("x", rect.x + rect.width / 2)
-            .attr("y", rect.y + rect.height / 2 + 3.5)
-            // Centre align
-            .style("text-anchor", "middle")
-            .style("font-size", "10px")
-            .style("font-family", "sans-serif")
-            // Make it a little transparent to tone down the black
-            .style("opacity", 0.6)
-            // Prevent text cursor on hover and allow tooltips
-            .style("pointer-events", "none")
-            // Format the number
-            .text("ssssss");
-        }
-    }
   });

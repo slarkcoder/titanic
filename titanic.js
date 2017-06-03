@@ -93,6 +93,15 @@ d3.csv('train.csv', function(error, data) {
         .rollup(function(peoples) { return peoples.length; })
         .entries(data);
 
+
+    // let p = document.createElement("p");
+    // p.innerHTML = "泰坦尼克号是一艘奥林匹克级邮轮，于 1912 年 4 月处女航时撞上冰山沉没，泰坦尼克号由位于爱尔兰岛贝尔法斯特的哈兰德与沃尔夫造船厂兴建，是当时最大的客运轮船。1912年4月14日，船上时间夜里11时40分，泰坦尼克号撞上冰山；4月15日凌晨2时20分，船体断裂成两截后沉入大西洋，船上1500多人丧生。泰坦尼克号海难为和平时期死伤人数最惨重的海难之一。  —— —  维基百科 - 泰坦尼克号";
+    // document.body.appendChild(p);
+
+    let p = document.createElement("p");
+    p.innerHTML = "背景介绍：泰坦尼克号是一艘奥林匹克级邮轮，于 1912 年 4 月处女航时撞上冰山沉没，泰坦尼克号由位于爱尔兰岛贝尔法斯特的哈兰德与沃尔夫造船厂兴建，是当时最大的客运轮船。1912年4月14日，船上时间夜里11时40分，泰坦尼克号撞上冰山；4月15日凌晨2时20分，船体断裂成两截后沉入大西洋，船上1500多人丧生。泰坦尼克号海难为和平时期死伤人数最惨重的海难之一。 下面这个可视化使用柱状图展示了泰坦尼克号中幸存者和遇难者的人数统计。";
+    document.body.appendChild(p);
+
     //生存死亡柱状图
     var svg = dimple.newSvg("body", width, height);
     var chart = new dimple.chart(svg, nests);
